@@ -28,7 +28,7 @@ export default function Navbar() {
           <span className="w-8 h-8 rounded-xl bg-gradient-to-br from-brand-400 to-brand-600 flex items-center justify-center text-white text-sm shadow-[0_4px_12px_rgba(15,168,112,0.4)]">
             ⚡
           </span>
-          EVSync
+          Smart Electronic Vehicle Charging Management System
           <span className="hidden sm:inline text-xs font-normal text-slate-500 ml-1">Charging, anywhere in India</span>
         </Link>
 

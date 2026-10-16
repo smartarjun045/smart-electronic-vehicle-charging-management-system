@@ -54,7 +54,7 @@ export function createApp(): Express {
   });
   app.use('/api', limiter);
 
-  app.get('/health', (_req, res) => res.json({ status: 'ok', service: 'evsync-backend' }));
+  app.get('/health', (_req, res) => res.json({ status: 'ok', service: 'smart-electronic-vehicle-charging-management-system-backend' }));
   app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
   app.use('/api', apiRoutes);

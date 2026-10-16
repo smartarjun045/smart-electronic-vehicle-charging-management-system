@@ -9,7 +9,7 @@ export default function LoginPage() {
   const { login, error } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('user@evsync.demo');
+  const [email, setEmail] = useState('user@smart-ev-charging.demo');
   const [password, setPassword] = useState('Password123!');
   const [submitting, setSubmitting] = useState(false);
 
@@ -49,10 +49,10 @@ export default function LoginPage() {
         <OAuthButtons />
 
         <p className="text-xs text-slate-500 mt-5">
-          Demo credentials: <code>user@evsync.demo</code> / <code>Password123!</code> (or <code>admin@evsync.demo</code> for admin)
+          Demo credentials: <code>user@smart-ev-charging.demo</code> / <code>Password123!</code> (or <code>admin@smart-ev-charging.demo</code> for admin)
         </p>
         <div className="mt-5 border-t border-slate-100 pt-5 text-center">
-          <p className="text-sm text-slate-600 mb-3">New to EVSync?</p>
+          <p className="text-sm text-slate-600 mb-3">New to Smart Electronic Vehicle Charging Management System?</p>
           <Link className="btn-secondary w-full" to="/register">
             Create a new account
           </Link>

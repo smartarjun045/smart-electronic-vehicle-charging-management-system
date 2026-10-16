@@ -1,4 +1,4 @@
-# EVSync — this is a local academic demo. Update the Sitemap host below
+# Smart Electronic Vehicle Charging Management System — this is a local academic demo. Update the Sitemap host below
 # once you deploy to a real domain.
 User-agent: *
 Allow: /

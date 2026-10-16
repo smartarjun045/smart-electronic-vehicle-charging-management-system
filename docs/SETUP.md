@@ -6,7 +6,7 @@
 - npm 9+ (bundled with Node.js)
 - MongoDB 6+ — either:
   - installed locally (https://www.mongodb.com/try/download/community), or
-  - run via Docker: `docker run -d -p 27017:27017 --name evsync-mongo mongo:7`
+  - run via Docker: `docker run -d -p 27017:27017 --name smart-electronic-vehicle-charging-management-system-mongo mongo:7`
 - (Optional) Docker + Docker Compose for the one-command setup
 
 See also [`requirements.txt`](../requirements.txt).
@@ -14,8 +14,8 @@ See also [`requirements.txt`](../requirements.txt).
 ## 2. Clone & install
 
 ```bash
-git clone <this-repo-url> evsync
-cd evsync
+git clone <this-repo-url> smart-electronic-vehicle-charging-management-system
+cd smart-electronic-vehicle-charging-management-system
 
 cd backend
 cp .env.example .env
@@ -35,7 +35,7 @@ npm install
 | `PORT` | `5000` | API port |
 | `NODE_ENV` | `development` | |
 | `CLIENT_ORIGIN` | `http://localhost:5173` | CORS + Socket.IO origin — must match the frontend's dev server URL |
-| `MONGO_URI` | `mongodb://localhost:27017/evsync` | |
+| `MONGO_URI` | `mongodb://localhost:27017/smart-electronic-vehicle-charging-management-system` | |
 | `JWT_ACCESS_SECRET` / `JWT_REFRESH_SECRET` | placeholder | **Change these before any non-local use.** |
 | `JWT_ACCESS_EXPIRES_IN` | `15m` | |
 | `JWT_REFRESH_EXPIRES_IN` | `7d` | |

@@ -1,11 +1,11 @@
-# ⚡ EVSync — Smart EV Charging Station Locator & Slot Booking System
+# ⚡ Smart Electronic Vehicle Charging Management System
 
-EVSync is an academic (4th-year engineering project) full-stack platform for
+Smart Electronic Vehicle Charging Management System is an academic (4th-year engineering project) full-stack platform for
 discovering EV charging stations, booking charging slots, checking in via QR
 code, and running a **simulated** real-time charging session — end to end,
 locally, with **no physical EV charging hardware required**.
 
-Works anywhere in India: EVSync locates you (browser geolocation, or search
+Works anywhere in India: Smart Electronic Vehicle Charging Management System locates you (browser geolocation, or search
 any city/area by name) and finds nearby charging stations from there —
 Mumbai is just where the seed data is densest.
 
@@ -59,7 +59,7 @@ some admin CRUD screens are stubbed at the API level but not the full UI).
 ## Project structure
 
 ```
-evsync/
+smart-electronic-vehicle-charging-management-system/
 ├── backend/            Node.js + Express + TypeScript + MongoDB API
 ├── frontend/            React + Vite + TypeScript + Tailwind + Leaflet
 ├── docs/                 Architecture, API, database, OCPP, setup, limitations docs
@@ -73,7 +73,7 @@ evsync/
 ## Option A: Run with Docker (fastest)
 
 ```bash
-git clone <this-repo-url> evsync && cd evsync
+git clone <this-repo-url> smart-electronic-vehicle-charging-management-system && cd smart-electronic-vehicle-charging-management-system
 docker compose up --build
 ```
 
@@ -124,8 +124,8 @@ Created by `npm run seed`:
 
 | Role  | Email              | Password      |
 |-------|--------------------|---------------|
-| Admin | admin@evsync.demo  | Password123!  |
-| User  | user@evsync.demo   | Password123!  |
+| Admin | admin@smart-ev-charging.demo  | Password123!  |
+| User  | user@smart-ev-charging.demo   | Password123!  |
 
 The demo user already has a saved vehicle (Tata Nexon EV) and one
 historical completed charging session with an invoice and reward points, so
@@ -135,8 +135,8 @@ you can see populated screens immediately.
 
 ## Full demo walkthrough (matches the project's target demo scenario)
 
-1. Log in as `user@evsync.demo`.
-2. On the home page, EVSync shows nearby Mumbai charging stations
+1. Log in as `user@smart-ev-charging.demo`.
+2. On the home page, Smart Electronic Vehicle Charging Management System shows nearby Mumbai charging stations
    (uses your browser location if you allow it, otherwise defaults to
    Bandra Kurla Complex) plus a "Recommended for you" section with a
    transparent "why this station" explanation.
@@ -151,7 +151,7 @@ you can see populated screens immediately.
 6. When charging completes (or you click **Stop**), an invoice is
    generated and green points are credited automatically.
 7. Check **Rewards** and **Invoices** to see the results.
-8. Log in as `admin@evsync.demo` and open **Admin** to see the dashboard
+8. Log in as `admin@smart-ev-charging.demo` and open **Admin** to see the dashboard
    update with the new booking/session/revenue.
 
 ---

@@ -36,7 +36,7 @@ function record(chargerCode: string, messageType: OcppMessageType, payload: Reco
   if (log.length > MAX_LOG_SIZE) log.shift();
 }
 
-export function bootNotification(chargerCode: string, vendor = 'EVSync-Sim', model = 'VirtualCharger-1') {
+export function bootNotification(chargerCode: string, vendor = 'Smart Electronic Vehicle Charging Management System-Sim', model = 'VirtualCharger-1') {
   record(chargerCode, 'BootNotification', { chargePointVendor: vendor, chargePointModel: model });
 }
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>EVSync — Live Preview</title>
+<title>Smart Electronic Vehicle Charging Management System — Live Preview</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -63,7 +63,7 @@ a{color:inherit}
 </head>
 <body>
 <div class="nav">
-  <div class="brand"><span class="bolt">⚡</span>EVSync</div>
+  <div class="brand"><span class="bolt">⚡</span>Smart Electronic Vehicle Charging Management System</div>
   <div class="navr">
     <span class="pill" id="pointsPill">✦ 0 pts</span>
     <button class="iconbtn" id="themeBtn">🌙</button>
@@ -174,8 +174,8 @@ let state={loc:{lat:19.0656,lng:72.8678,label:"Bandra Kurla Complex, Mumbai (def
 
 // ---------- theme ----------
 const root=document.documentElement,themeBtn=document.getElementById('themeBtn');
-let theme='dark'; try{theme=localStorage.getItem('evsync_theme')||'dark'}catch(e){}
-function applyTheme(t){theme=t;root.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'🌙':'☀️';try{localStorage.setItem('evsync_theme',t)}catch(e){}}
+let theme='dark'; try{theme=localStorage.getItem('smart_electronic_vehicle_charging_management_system_theme')||'dark'}catch(e){}
+function applyTheme(t){theme=t;root.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'🌙':'☀️';try{localStorage.setItem('smart_electronic_vehicle_charging_management_system_theme',t)}catch(e){}}
 applyTheme(theme); themeBtn.onclick=()=>applyTheme(theme==='dark'?'light':'dark');
 
 // ---------- toast ----------
@@ -316,7 +316,7 @@ document.getElementById('authPill').onclick=()=>state.user?doLogout():openAuth('
 document.getElementById('authSwitch').onclick=()=>openAuth(state.authMode==='login'?'register':'login');
 authModal.onclick=e=>{if(e.target===authModal)authModal.classList.remove('open');};
 document.getElementById('authSubmit').onclick=()=>{
- const email=document.getElementById('authEmail').value||'demo@evsync.demo';
+ const email=document.getElementById('authEmail').value||'demo@smart-ev-charging.demo';
  state.user={name:document.getElementById('authName').value||email.split('@')[0],email};
  state.points=state.authMode==='login'?120:0;
  document.getElementById('pointsPill').textContent='✦ '+state.points+' pts';

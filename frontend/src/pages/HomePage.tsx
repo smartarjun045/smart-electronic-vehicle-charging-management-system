@@ -7,7 +7,7 @@ import StationCard from '../components/StationCard';
 import { usePageTitle } from '../hooks/usePageTitle';
 
 // Fallback location if the browser denies/lacks geolocation and the user
-// hasn't searched a place yet: Bandra Kurla Complex, Mumbai. EVSync itself
+// hasn't searched a place yet: Bandra Kurla Complex, Mumbai. Smart Electronic Vehicle Charging Management System itself
 // is NOT limited to Mumbai — nearby search runs against whatever
 // coordinates are active, anywhere in India (or beyond, given station data).
 const DEFAULT_LOCATION = { lat: 19.0656, lng: 72.8678, label: 'Bandra Kurla Complex, Mumbai (default)' };

@@ -1,7 +1,7 @@
 {
-  "name": "evsync-backend",
+  "name": "smart-electronic-vehicle-charging-management-system-backend",
   "version": "1.0.0",
-  "description": "EVSync backend API - Smart EV Charging Station Locator & Slot Booking System",
+  "description": "Smart Electronic Vehicle Charging Management System backend API",
   "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon --exec ts-node src/server.ts",

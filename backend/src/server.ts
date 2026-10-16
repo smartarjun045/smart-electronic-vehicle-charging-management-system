@@ -18,7 +18,7 @@ async function main() {
 
   httpServer.listen(env.port, () => {
     // eslint-disable-next-line no-console
-    console.log(`[server] EVSync backend listening on http://localhost:${env.port}`);
+    console.log(`[server] Smart Electronic Vehicle Charging Management System backend listening on http://localhost:${env.port}`);
     // eslint-disable-next-line no-console
     console.log(`[server] API docs at http://localhost:${env.port}/api/docs`);
   });

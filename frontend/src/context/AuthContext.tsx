@@ -21,7 +21,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<string | null>(null);
 
   const refreshMe = useCallback(async () => {
-    const token = localStorage.getItem('evsync_access_token');
+    const token = localStorage.getItem('smart_electronic_vehicle_charging_management_system_access_token');
     if (!token) {
       setLoading(false);
       return;
@@ -31,7 +31,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const u = res.data.data;
       setUser({ id: u._id, name: u.name, email: u.email, role: u.role, greenPoints: u.greenPoints });
     } catch {
-      localStorage.removeItem('evsync_access_token');
+      localStorage.removeItem('smart_electronic_vehicle_charging_management_system_access_token');
       setUser(null);
     } finally {
       setLoading(false);
@@ -47,7 +47,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const res = await api.post('/auth/login', { email, password });
       const { accessToken, user: u } = res.data.data;
-      localStorage.setItem('evsync_access_token', accessToken);
+      localStorage.setItem('smart_electronic_vehicle_charging_management_system_access_token', accessToken);
       setUser(u);
     } catch (err) {
       setError(unwrapError(err));
@@ -60,7 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const res = await api.post('/auth/register', { name, email, password, phone });
       const { accessToken, user: u } = res.data.data;
-      localStorage.setItem('evsync_access_token', accessToken);
+      localStorage.setItem('smart_electronic_vehicle_charging_management_system_access_token', accessToken);
       setUser(u);
     } catch (err) {
       setError(unwrapError(err));
@@ -69,14 +69,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const logout = useCallback(() => {
-    localStorage.removeItem('evsync_access_token');
+    localStorage.removeItem('smart_electronic_vehicle_charging_management_system_access_token');
     setUser(null);
   }, []);
 
   // Used by /oauth-callback after a successful Google/GitHub redirect: the
   // backend already issued a JWT, we just need to store it and load the profile.
   const loginWithToken = useCallback(async (accessToken: string) => {
-    localStorage.setItem('evsync_access_token', accessToken);
+    localStorage.setItem('smart_electronic_vehicle_charging_management_system_access_token', accessToken);
     await refreshMe();
   }, [refreshMe]);
 

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 export function usePageTitle(title: string) {
   useEffect(() => {
     const prev = document.title;
-    document.title = `${title} · EVSync`;
+    document.title = `${title} · Smart Electronic Vehicle Charging Management System`;
     return () => {
       document.title = prev;
     };

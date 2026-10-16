@@ -1,4 +1,4 @@
-# EVSync — Requirements
+# Smart Electronic Vehicle Charging Management System — Requirements
 #
 # This is a Node.js / TypeScript project (backend: Express + MongoDB,
 # frontend: React + Vite), NOT a Python project — so there is no Python

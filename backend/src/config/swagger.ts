@@ -4,10 +4,10 @@ export const swaggerSpec = swaggerJSDoc({
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'EVSync API',
+      title: 'Smart Electronic Vehicle Charging Management System API',
       version: '1.0.0',
       description:
-        'Smart EV Charging Station Locator & Slot Booking System — REST API. ' +
+        'Smart Electronic Vehicle Charging Management System — REST API. ' +
         'See docs/API.md in the repository for the full endpoint reference; ' +
         'this Swagger UI documents the same routes for interactive exploration.',
     },

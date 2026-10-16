@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { enableAnalytics } from '../utils/analytics';
 
-const CONSENT_KEY = 'evsync_consent';
+const CONSENT_KEY = 'smart_electronic_vehicle_charging_management_system_consent';
 
 export default function ConsentBanner() {
   const [visible, setVisible] = useState(false);
@@ -36,7 +36,7 @@ export default function ConsentBanner() {
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-lg">
       <div className="card !p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 shadow-lg">
         <p className="text-xs text-slate-600 flex-1">
-          EVSync stores your login session in your browser's local storage (not cookies) and, only if
+          Smart Electronic Vehicle Charging Management System stores your login session in your browser's local storage (not cookies) and, only if
           you accept, uses privacy-respecting analytics to see which pages are used. See our{' '}
           <Link to="/privacy" className="text-brand-600 font-medium">
             Privacy Policy

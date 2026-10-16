@@ -5,7 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   plugins: [
     react(),
-    // Makes EVSync installable like a native app (Add to Home Screen on
+    // Makes Smart Electronic Vehicle Charging Management System installable like a native app (Add to Home Screen on
     // mobile, "Install" on desktop Chrome/Edge) and lets the shell load
     // instantly on repeat visits via a precaching service worker. API
     // calls themselves are NOT cached offline — this is a UI/asset
@@ -14,8 +14,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
       manifest: {
-        name: 'EVSync — Smart EV Charging',
-        short_name: 'EVSync',
+        name: 'Smart Electronic Vehicle Charging Management System',
+        short_name: 'Smart EV Charging',
         description: 'Find, book, and track EV charging — anywhere in India.',
         theme_color: '#0fa870',
         background_color: '#ffffff',

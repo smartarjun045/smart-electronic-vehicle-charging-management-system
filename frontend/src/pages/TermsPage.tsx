@@ -10,7 +10,7 @@ export default function TermsPage() {
 
         <div className="prose prose-slate max-w-none text-sm text-slate-600 space-y-4">
           <p>
-            EVSync is provided as an academic, open-source demonstration project. By using it you
+            Smart Electronic Vehicle Charging Management System is provided as an academic, open-source demonstration project. By using it you
             agree to the terms below. This is a template for a student project's viva/demo — replace
             it with real terms drafted by a qualified professional before any commercial or public use.
           </p>

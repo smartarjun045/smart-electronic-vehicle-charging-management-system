@@ -131,7 +131,7 @@ export async function handleGithubCallback(code: string): Promise<IUser> {
     throw new ApiError(502, 'OAUTH_TOKEN_EXCHANGE_FAILED', tokenData.error || 'GitHub did not return an access token.');
   }
 
-  const headers = { Authorization: `token ${tokenData.access_token}`, 'User-Agent': 'EVSync-App' };
+  const headers = { Authorization: `token ${tokenData.access_token}`, 'User-Agent': 'Smart-Electronic-Vehicle-Charging-Management-System-App' };
   const profileRes = await fetch(GITHUB_USER_URL, { headers });
   if (!profileRes.ok) {
     throw new ApiError(502, 'OAUTH_PROFILE_FETCH_FAILED', 'Failed to fetch GitHub profile.');

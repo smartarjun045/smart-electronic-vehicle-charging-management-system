@@ -128,8 +128,8 @@ async function seed() {
   console.log('[seed] creating users...');
   const passwordHash = await bcrypt.hash('Password123!', 12);
   const admin = await User.create({
-    name: 'EVSync Admin',
-    email: 'admin@evsync.demo',
+    name: 'Smart Electronic Vehicle Charging Management System Admin',
+    email: 'admin@smart-ev-charging.demo',
     phone: '9876500000',
     passwordHash,
     role: 'ADMIN',
@@ -137,7 +137,7 @@ async function seed() {
   });
   const demoUser = await User.create({
     name: 'Rohan Mehta',
-    email: 'user@evsync.demo',
+    email: 'user@smart-ev-charging.demo',
     phone: '9876500001',
     passwordHash,
     role: 'USER',
@@ -146,7 +146,7 @@ async function seed() {
   });
   await User.create({
     name: 'Ananya Sharma',
-    email: 'ananya@evsync.demo',
+    email: 'ananya@smart-ev-charging.demo',
     phone: '9876500002',
     passwordHash,
     role: 'USER',
@@ -259,8 +259,8 @@ async function seed() {
   console.log('[seed] done.');
   console.log('[seed] ----------------------------------------------------');
   console.log('[seed] Demo credentials (see README.md):');
-  console.log('[seed]   Admin: admin@evsync.demo / Password123!');
-  console.log('[seed]   User:  user@evsync.demo  / Password123!');
+  console.log('[seed]   Admin: admin@smart-ev-charging.demo / Password123!');
+  console.log('[seed]   User:  user@smart-ev-charging.demo  / Password123!');
   console.log('[seed] ----------------------------------------------------');
 
   await mongoose.disconnect();

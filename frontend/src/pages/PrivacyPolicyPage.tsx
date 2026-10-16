@@ -10,9 +10,9 @@ export default function PrivacyPolicyPage() {
 
         <div className="prose prose-slate max-w-none text-sm text-slate-600 space-y-4">
           <p>
-            EVSync is an academic demonstration project. This policy describes, in plain language,
+            Smart Electronic Vehicle Charging Management System is an academic demonstration project. This policy describes, in plain language,
             what data the application collects and how it is used in this build. If you deploy
-            EVSync for real users, have this reviewed by a qualified lawyer before relying on it.
+            Smart Electronic Vehicle Charging Management System for real users, have this reviewed by a qualified lawyer before relying on it.
           </p>
 
           <h2 className="font-display font-bold text-slate-800 text-base mt-4">What we collect</h2>
@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
 
           <h2 className="font-display font-bold text-slate-800 text-base mt-4">Cookies & local storage</h2>
           <p>
-            EVSync stores your session token and theme preference in your browser's local storage, not
+            Smart Electronic Vehicle Charging Management System stores your session token and theme preference in your browser's local storage, not
             cookies, so there is nothing sent to the server on every request beyond what you explicitly
             do. If optional analytics is enabled (see the cookie/consent banner), it only runs after you
             accept, and can be disabled at any time by clearing site data.
