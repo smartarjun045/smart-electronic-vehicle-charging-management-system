@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  EVSync sitemap — only public, non-authenticated routes are listed.
+  Replace https://your-deployed-domain.example with your real domain
+  after deployment (see docs/DEPLOYMENT.md).
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://your-deployed-domain.example/</loc><priority>1.0</priority></url>
+  <url><loc>https://your-deployed-domain.example/map</loc><priority>0.8</priority></url>
+  <url><loc>https://your-deployed-domain.example/login</loc><priority>0.5</priority></url>
+  <url><loc>https://your-deployed-domain.example/register</loc><priority>0.5</priority></url>
+  <url><loc>https://your-deployed-domain.example/privacy</loc><priority>0.3</priority></url>
+  <url><loc>https://your-deployed-domain.example/terms</loc><priority>0.3</priority></url>
+</urlset>

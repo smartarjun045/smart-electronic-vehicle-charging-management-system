@@ -1,0 +1,30 @@
+# EVSync — Requirements
+#
+# This is a Node.js / TypeScript project (backend: Express + MongoDB,
+# frontend: React + Vite), NOT a Python project — so there is no Python
+# `pip` dependency list to install. This file exists because it was
+# requested explicitly; it documents the *system-level prerequisites* you
+# need installed before running `npm install` in backend/ and frontend/.
+# The actual dependency manifests (equivalent to Python's requirements.txt)
+# are:
+#   backend/package.json   — installed via: cd backend  && npm install
+#   frontend/package.json  — installed via: cd frontend && npm install
+#
+# ----------------------------------------------------------------------
+# SYSTEM PREREQUISITES
+# ----------------------------------------------------------------------
+Node.js            >= 18.18 (LTS 20.x recommended)   https://nodejs.org
+npm                >= 9 (ships with Node.js)
+MongoDB             >= 6.0 (local install OR Docker) https://www.mongodb.com/try/download/community
+Docker + Docker Compose (optional, for one-command setup) https://docs.docker.com/get-docker/
+Git
+
+# ----------------------------------------------------------------------
+# Quick check after installing Node.js:
+#   node -v
+#   npm -v
+#   mongod --version      (only needed if NOT using Docker for MongoDB)
+# ----------------------------------------------------------------------
+#
+# See README.md for full setup instructions (local, without Docker) and
+# docker-compose.yml for the one-command containerized setup.

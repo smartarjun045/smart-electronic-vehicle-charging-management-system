@@ -1,0 +1,13 @@
+# EVSync — this is a local academic demo. Update the Sitemap host below
+# once you deploy to a real domain.
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /bookings
+Disallow: /charging
+Disallow: /invoices
+Disallow: /profile
+Disallow: /vehicle
+Disallow: /oauth-callback
+
+Sitemap: https://your-deployed-domain.example/sitemap.xml

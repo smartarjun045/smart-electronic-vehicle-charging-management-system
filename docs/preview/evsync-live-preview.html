@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EVSync — Live Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8fafc;--card:#fff;--line:#e6ece9;--ink:#0f172a;--sub:#64748b;--brand:#0fa870;--brand2:#12c98e;--accent:#2563eb;
+ --glow:0 2px 10px rgba(15,23,42,.06);padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
+:root[data-theme="dark"]{--bg:#0a0f14;--card:#101820;--line:#1e2b33;--ink:#eef4f2;--sub:#8aa0a6;--glow:0 8px 24px rgba(0,0,0,.4)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,sans-serif;min-height:100%}
+h1,h2,h3,.brand{font-family:Manrope,sans-serif}
+.nav{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line);padding:calc(10px + env(safe-area-inset-top,0)) 16px 10px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:800;display:flex;align-items:center;gap:8px}
+.bolt{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--accent));display:flex;align-items:center;justify-content:center;color:#fff}
+.navr{display:flex;gap:8px;align-items:center}
+.iconbtn{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:14px}
+.pill{background:var(--card);border:1px solid var(--line);color:var(--sub);font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;cursor:pointer}
+.pill.active{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-color:transparent}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;border-bottom:1px solid var(--line)}
+main{max-width:760px;margin:0 auto;padding:18px 16px 60px}
+.view{display:none;animation:in .3s ease}
+.view.active{display:block}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.hero{border-radius:28px;padding:28px 20px;text-align:center;margin-bottom:18px;background:linear-gradient(135deg,rgba(15,168,112,.14),rgba(37,99,235,.08));border:1px solid var(--line)}
+.hero h1{font-size:28px;margin:6px 0}
+.muted{color:var(--sub);font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:var(--glow)}
+.row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;background:rgba(100,116,139,.1);color:var(--sub);margin:0 5px 5px 0}
+.badge.g{background:rgba(15,168,112,.12);color:var(--brand)}
+.badge.a{background:rgba(245,158,11,.12);color:#b45309}
+input,select{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:14px;padding:10px 12px;font-size:14px}
+.btn{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border:none;padding:10px 16px;border-radius:999px;font-weight:700;font-size:13px;cursor:pointer}
+.btn.sec{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.flexgap{display:flex;gap:8px}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px;text-align:left}
+.stat .l{font-size:11px;color:var(--sub)}
+.stat .v{font-weight:800}
+.ring{width:160px;height:160px;margin:6px auto;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:28px}
+.qr{width:110px;height:110px;margin:12px auto;border-radius:10px;background:repeating-conic-gradient(var(--ink) 0% 25%,transparent 0% 50%);background-size:13px 13px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center;box-shadow:var(--glow)}
+.kpi b{font-size:20px;display:block;color:var(--brand)}
+.kpi span{font-size:10px;color:var(--sub)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--card);border-radius:24px;padding:24px;max-width:360px;width:100%}
+.oauth{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.divider{display:flex;align-items:center;gap:10px;margin:12px 0;color:var(--sub);font-size:11px}
+.divider:before,.divider:after{content:"";flex:1;height:1px;background:var(--line)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:13px;z-index:60;display:none}
+a{color:inherit}
+</style>
+</head>
+<body>
+<div class="nav">
+  <div class="brand"><span class="bolt">⚡</span>EVSync</div>
+  <div class="navr">
+    <span class="pill" id="pointsPill">✦ 0 pts</span>
+    <button class="iconbtn" id="themeBtn">🌙</button>
+    <button class="pill" id="authPill">Log in</button>
+  </div>
+</div>
+<div class="tabs" id="tabs"></div>
+<main>
+
+<div class="view" data-v="home">
+  <div class="hero">
+    <div class="badge g">⚡ Live across India</div>
+    <h1>Charge your EV, anywhere</h1>
+    <p class="muted">Real distance search over live browser location — try it below.</p>
+  </div>
+  <div class="flexgap" style="margin-bottom:8px">
+    <select id="citySel" style="flex:1"></select>
+    <button class="btn sec" id="geoBtn">📍 My location</button>
+  </div>
+  <input id="filterInput" placeholder="Filter by station or city name...">
+  <h3 style="margin:16px 0 8px">Nearby stations <span id="countLbl" class="muted"></span></h3>
+  <div id="stationList"></div>
+</div>
+
+<div class="view" data-v="station">
+  <div id="stationDetail"></div>
+</div>
+
+<div class="view" data-v="charging">
+  <div class="card" style="text-align:center">
+    <h2>Charging in progress</h2>
+    <div class="ring"><svg viewBox="0 0 36 36" width="160" height="160">
+      <path d="M18 2.0845a15.9155 15.9155 0 010 31.831 15.9155 15.9155 0 010-31.831" fill="none" stroke="var(--line)" stroke-width="3"/>
+      <path id="ringFg" d="M18 2.0845a15.9155 15.9155 0 010 31.831 15.9155 15.9155 0 010-31.831" fill="none" stroke="url(#gg)" stroke-width="3" stroke-linecap="round" stroke-dasharray="0,100"/>
+      <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0fa870"/><stop offset="100%" stop-color="#2563eb"/></linearGradient></defs>
+    </svg><b id="pctLbl">0%</b></div>
+    <div class="grid2">
+      <div class="stat"><div class="l">Energy</div><div class="v" id="energyLbl">0.00 kWh</div></div>
+      <div class="stat"><div class="l">Cost</div><div class="v" id="costLbl">₹0.00</div></div>
+      <div class="stat"><div class="l">Power</div><div class="v" id="powerLbl">0 kW</div></div>
+      <div class="stat"><div class="l">Status</div><div class="v" id="statusLbl">CHARGING</div></div>
+    </div>
+    <button class="btn sec" id="stopBtn" style="margin-top:12px;width:100%">Stop charging & finish</button>
+    <p class="muted" style="margin-top:8px">Simulated live — real app streams this via Socket.IO from the backend.</p>
+  </div>
+</div>
+
+<div class="view" data-v="admin">
+  <h2>Admin overview</h2>
+  <div class="kpis">
+    <div class="kpi"><b id="kUsers">3</b><span>Users</span></div>
+    <div class="kpi"><b id="kBook">0</b><span>Bookings (session)</span></div>
+    <div class="kpi"><b id="kRev">₹0</b><span>Revenue (session)</span></div>
+  </div>
+  <div class="card">
+    <b>Charger status (sample fleet)</b>
+    <div id="chargerBreak" style="margin-top:8px;font-size:13px"></div>
+  </div>
+</div>
+
+</main>
+
+<div class="modal-bg" id="authModal">
+  <div class="modal">
+    <h2 id="authTitle">Log in</h2>
+    <p class="muted" style="margin-top:-6px">Any email/password works in this preview.</p>
+    <input id="authName" placeholder="Full name" style="margin-top:10px;display:none">
+    <input id="authEmail" placeholder="Email" style="margin-top:10px">
+    <input id="authPass" placeholder="Password" type="password" style="margin-top:10px">
+    <button class="btn" id="authSubmit" style="width:100%;margin-top:12px">Log in</button>
+    <div class="divider">or continue with</div>
+    <div class="oauth">
+      <button class="btn sec" onclick="toast('Google OAuth needs the real backend — see docs/SETUP.md')">🔵 Google</button>
+      <button class="btn sec" onclick="toast('GitHub OAuth needs the real backend — see docs/SETUP.md')">⚫ GitHub</button>
+    </div>
+    <p class="muted" style="margin-top:10px;text-align:center;cursor:pointer" id="authSwitch">Need an account? Sign up</p>
+  </div>
+</div>
+<div class="toast" id="toastEl"></div>
+
+<script>
+// ---------- data ----------
+const CITIES=[["Mumbai",19.076,72.8777],["Pune",18.5362,73.8940],["New Delhi",28.6315,77.2167],
+["Bengaluru",12.9698,77.7500],["Chennai",12.9010,80.2279],["Kolkata",22.5726,88.4172],
+["Hyderabad",17.4483,78.3915],["Ahmedabad",23.0339,72.5079],["Jaipur",26.9124,75.7873],
+["Chandigarh",30.7410,76.7822],["Lucknow",26.8500,80.9460],["Kochi",9.9658,76.2740],["Nagpur",21.1520,79.0850]];
+const STATIONS=[
+ {n:"BKC EV Hub",c:"Mumbai",lat:19.0656,lng:72.8678,price:12,total:5,avail:3,rating:4.5,op:"Tata Power EZ Charge"},
+ {n:"Koregaon Park Hub",c:"Pune",lat:18.5362,lng:73.8940,price:13.5,total:4,avail:2,rating:4.3,op:"Statiq"},
+ {n:"Connaught Place Hub",c:"New Delhi",lat:28.6315,lng:77.2167,price:11,total:6,avail:4,rating:4.6,op:"Tata Power EZ Charge"},
+ {n:"Whitefield Charge Point",c:"Bengaluru",lat:12.9698,lng:77.75,price:10.5,total:4,avail:1,rating:4.4,op:"Ather Grid"},
+ {n:"OMR Fast Charge Hub",c:"Chennai",lat:12.9010,lng:80.2279,price:11.5,total:3,avail:3,rating:4.2,op:"Statiq"},
+ {n:"Salt Lake Charging Bay",c:"Kolkata",lat:22.5726,lng:88.4172,price:12.5,total:4,avail:0,rating:4.1,op:"Tata Power EZ Charge"},
+ {n:"HITEC City Charger",c:"Hyderabad",lat:17.4483,lng:78.3915,price:10.8,total:5,avail:2,rating:4.5,op:"Statiq"},
+ {n:"SG Highway Fast Charge",c:"Ahmedabad",lat:23.0339,lng:72.5079,price:11.2,total:3,avail:3,rating:4.0,op:"ChargeZone"},
+ {n:"C-Scheme Charging Point",c:"Jaipur",lat:26.9124,lng:75.7873,price:12.8,total:4,avail:1,rating:4.3,op:"Tata Power EZ Charge"},
+ {n:"Sector 17 Charger",c:"Chandigarh",lat:30.7410,lng:76.7822,price:11.9,total:3,avail:2,rating:4.4,op:"Statiq"},
+ {n:"Marine Drive Charger",c:"Kochi",lat:9.9658,lng:76.2740,price:10.9,total:3,avail:3,rating:4.6,op:"Ather Grid"},
+ {n:"Civil Lines Hub",c:"Nagpur",lat:21.1520,lng:79.0850,price:11.4,total:4,avail:2,rating:4.2,op:"Tata Power EZ Charge"},
+];
+function haversine(lat1,lon1,lat2,lon2){const R=6371,dLat=(lat2-lat1)*Math.PI/180,dLon=(lon2-lon1)*Math.PI/180;
+ const a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+ return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));}
+
+// ---------- state ----------
+let state={loc:{lat:19.0656,lng:72.8678,label:"Bandra Kurla Complex, Mumbai (default)"},user:null,points:0,
+ bookings:[],revenue:0,selected:null,session:null,authMode:'login',filter:''};
+
+// ---------- theme ----------
+const root=document.documentElement,themeBtn=document.getElementById('themeBtn');
+let theme='dark'; try{theme=localStorage.getItem('evsync_theme')||'dark'}catch(e){}
+function applyTheme(t){theme=t;root.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'🌙':'☀️';try{localStorage.setItem('evsync_theme',t)}catch(e){}}
+applyTheme(theme); themeBtn.onclick=()=>applyTheme(theme==='dark'?'light':'dark');
+
+// ---------- toast ----------
+function toast(msg){const t=document.getElementById('toastEl');t.textContent=msg;t.style.display='block';clearTimeout(window._tt);window._tt=setTimeout(()=>t.style.display='none',2600);}
+
+// ---------- tabs/views ----------
+const VIEWS=[["home","Home"],["station","Station"],["charging","Charging"],["admin","Admin"]];
+const tabsEl=document.getElementById('tabs');
+VIEWS.forEach(([v,label],i)=>{const b=document.createElement('button');b.className='pill'+(i===0?' active':'');b.textContent=label;
+ b.onclick=()=>showView(v);tabsEl.appendChild(b);});
+function showView(v){document.querySelectorAll('.pill').forEach((p,i)=>p.classList.toggle('active',VIEWS[i]&&VIEWS[i][0]===v));
+ document.querySelectorAll('.view').forEach(el=>el.classList.toggle('active',el.dataset.v===v));
+ if(v==='admin')renderAdmin();}
+showView('home');
+
+// ---------- city select ----------
+const citySel=document.getElementById('citySel');
+CITIES.forEach((c,i)=>{const o=document.createElement('option');o.value=i;o.textContent='📍 '+c[0];citySel.appendChild(o);});
+citySel.onchange=()=>{const c=CITIES[+citySel.value];state.loc={lat:c[1],lng:c[2],label:c[0]+' (selected)'};renderStations();};
+document.getElementById('geoBtn').onclick=()=>{
+ if(!navigator.geolocation){toast('Geolocation not supported in this browser');return;}
+ toast('Requesting location...');
+ navigator.geolocation.getCurrentPosition(p=>{state.loc={lat:p.coords.latitude,lng:p.coords.longitude,label:'Your current location'};renderStations();toast('Located you — showing real nearby distances');},
+ ()=>toast('Location denied — pick a city instead'),{timeout:8000});
+};
+document.getElementById('filterInput').oninput=e=>{state.filter=e.target.value.toLowerCase();renderStations();};
+
+// ---------- render stations ----------
+function renderStations(){
+ const withDist=STATIONS.map(s=>({...s,d:haversine(state.loc.lat,state.loc.lng,s.lat,s.lng)}))
+  .filter(s=>!state.filter||s.n.toLowerCase().includes(state.filter)||s.c.toLowerCase().includes(state.filter))
+  .sort((a,b)=>a.d-b.d);
+ document.getElementById('countLbl').textContent=`near ${state.loc.label} (${withDist.length})`;
+ const list=document.getElementById('stationList'); list.innerHTML='';
+ withDist.forEach(s=>{
+  const div=document.createElement('div'); div.className='card';
+  div.innerHTML=`<div class="row"><b>${s.n}</b><span class="badge a">★ ${s.rating}</span></div>
+   <div style="margin-top:6px">
+    <span class="badge">${s.d.toFixed(1)} km · ${s.c}</span>
+    <span class="badge ${s.avail>0?'g':'a'}">${s.avail}/${s.total} available</span>
+    <span class="badge">₹${s.price}/kWh</span>
+   </div>
+   <button class="btn" style="width:100%;margin-top:10px">View & Book</button>`;
+  div.querySelector('button').onclick=()=>openStation(s);
+  list.appendChild(div);
+ });
+}
+renderStations();
+
+// ---------- station detail + booking ----------
+function openStation(s){
+ state.selected=s;
+ const el=document.getElementById('stationDetail');
+ el.innerHTML=`<div class="card">
+   <div class="row"><h2 style="margin:0">${s.n}</h2><span class="badge a">★ ${s.rating}</span></div>
+   <p class="muted">${s.c} · ${s.op} · ${s.d?s.d.toFixed(1)+' km away':''}</p>
+   <span class="badge">₹${s.price}/kWh</span><span class="badge ${s.avail>0?'g':'a'}">${s.avail}/${s.total} available</span>
+ </div>
+ <div class="card" id="bookBox">
+   <b>Book a slot</b>
+   <div class="grid2" style="margin-top:10px">
+     <select id="durSel"><option value="15">15 min</option><option value="30" selected>30 min</option><option value="60">60 min</option></select>
+     <input id="timeSel" type="time">
+   </div>
+   <button class="btn" id="bookBtn" style="width:100%;margin-top:10px" ${s.avail<1?'disabled':''}>${s.avail<1?'No chargers available':'Confirm booking'}</button>
+   <p id="conflictMsg" class="muted" style="color:#dc2626;display:none"></p>
+ </div>`;
+ const now=new Date(); document.getElementById('timeSel').value=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+ document.getElementById('bookBtn').onclick=()=>tryBook(s);
+ showView('station');
+}
+function tryBook(s){
+ if(!state.user){openAuth('login');toast('Log in first to book a slot');return;}
+ const dur=+document.getElementById('durSel').value, time=document.getElementById('timeSel').value;
+ const start=time, conflict=state.bookings.find(b=>b.stationId===s.n && b.time===time);
+ const msg=document.getElementById('conflictMsg');
+ if(conflict){msg.style.display='block';msg.textContent='⚠ BOOKING_CONFLICT — that exact slot on this station is already booked in this session. Try a different time.';return;}
+ msg.style.display='none';
+ state.bookings.push({stationId:s.n,time,dur,price:s.price});
+ document.getElementById('bookBox').innerHTML=`<b>Booking confirmed 🎉</b><div class="qr"></div>
+  <p class="muted">QR generated (opaque token — no personal data encoded).</p>
+  <button class="btn" style="width:100%" id="checkinBtn">Simulate QR check-in & start charging</button>`;
+ document.getElementById('checkinBtn').onclick=()=>startCharging(s);
+}
+
+// ---------- charging simulation ----------
+function startCharging(s){
+ state.session={battery:20,energy:0,cost:0,price:s.price,power:s.avail>0?45:30,timer:null};
+ showView('charging'); document.getElementById('stopBtn').disabled=false;
+ clearInterval(window._chargeTimer);
+ window._chargeTimer=setInterval(()=>{
+  const sess=state.session; if(!sess)return;
+  const taper=sess.battery>80?0.4:1; sess.battery=Math.min(100,sess.battery+3.5*taper);
+  sess.energy+=0.9*taper; sess.cost=sess.energy*sess.price;
+  updateChargingUI();
+  if(sess.battery>=100)finishCharging(s);
+ },700);
+}
+function updateChargingUI(){
+ const sess=state.session; if(!sess)return;
+ document.getElementById('pctLbl').textContent=Math.round(sess.battery)+'%';
+ document.getElementById('ringFg').setAttribute('stroke-dasharray',sess.battery+',100');
+ document.getElementById('energyLbl').textContent=sess.energy.toFixed(2)+' kWh';
+ document.getElementById('costLbl').textContent='₹'+sess.cost.toFixed(2);
+ document.getElementById('powerLbl').textContent=sess.power+' kW';
+}
+document.getElementById('stopBtn').onclick=()=>state.selected&&finishCharging(state.selected);
+function finishCharging(s){
+ clearInterval(window._chargeTimer);
+ const sess=state.session; if(!sess)return;
+ document.getElementById('statusLbl').textContent='COMPLETED';
+ const pts=Math.max(1,Math.round(sess.energy*2));
+ state.points+=pts; state.revenue+=sess.cost;
+ document.getElementById('pointsPill').textContent='✦ '+state.points+' pts';
+ toast(`Charging complete — +${pts} green points, ₹${sess.cost.toFixed(2)} invoiced`);
+ document.getElementById('stopBtn').disabled=true;
+ state.session=null;
+}
+
+// ---------- admin ----------
+function renderAdmin(){
+ document.getElementById('kBook').textContent=state.bookings.length;
+ document.getElementById('kRev').textContent='₹'+state.revenue.toFixed(0);
+ const breakdown={AVAILABLE:0,CHARGING:0,FAULTED:1};
+ STATIONS.forEach(s=>{breakdown.AVAILABLE+=s.avail;breakdown.CHARGING+=(s.total-s.avail);});
+ document.getElementById('chargerBreak').innerHTML=Object.entries(breakdown).map(([k,v])=>
+  `<div class="row" style="margin-top:6px"><span>${k}</span><span class="badge ${k==='AVAILABLE'?'g':k==='FAULTED'?'a':''}">${v}</span></div>`).join('');
+}
+
+// ---------- auth modal ----------
+const authModal=document.getElementById('authModal');
+function openAuth(mode){state.authMode=mode;document.getElementById('authTitle').textContent=mode==='login'?'Log in':'Sign up';
+ document.getElementById('authName').style.display=mode==='login'?'none':'block';
+ document.getElementById('authSubmit').textContent=mode==='login'?'Log in':'Sign up';
+ document.getElementById('authSwitch').textContent=mode==='login'?'Need an account? Sign up':'Have an account? Log in';
+ authModal.classList.add('open');}
+document.getElementById('authPill').onclick=()=>state.user?doLogout():openAuth('login');
+document.getElementById('authSwitch').onclick=()=>openAuth(state.authMode==='login'?'register':'login');
+authModal.onclick=e=>{if(e.target===authModal)authModal.classList.remove('open');};
+document.getElementById('authSubmit').onclick=()=>{
+ const email=document.getElementById('authEmail').value||'demo@evsync.demo';
+ state.user={name:document.getElementById('authName').value||email.split('@')[0],email};
+ state.points=state.authMode==='login'?120:0;
+ document.getElementById('pointsPill').textContent='✦ '+state.points+' pts';
+ document.getElementById('authPill').textContent='Logout ('+state.user.name+')';
+ authModal.classList.remove('open'); toast('Signed in as '+state.user.name+' (preview — no real backend)');
+};
+function doLogout(){state.user=null;document.getElementById('authPill').textContent='Log in';toast('Logged out');}
+</script>
+</body>
+</html>
