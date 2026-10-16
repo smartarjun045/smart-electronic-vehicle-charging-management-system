@@ -1,5 +1,7 @@
 # ⚡ Smart Electronic Vehicle Charging Management System
 
+**Smart Electronic Vehicle Charging Management System — a full-stack platform for discovering EV charging stations, booking charging slots, and tracking simulated charging sessions.**
+
 Smart Electronic Vehicle Charging Management System is an academic (4th-year engineering project) full-stack platform for
 discovering EV charging stations, booking charging slots, checking in via QR
 code, and running a **simulated** real-time charging session — end to end,
@@ -183,3 +185,7 @@ See [`docs/TESTING.md`](docs/TESTING.md) for what's covered and how to extend it
 MIT — see [`LICENSE`](LICENSE). This is original code; it does not clone or
 rebrand any existing EV charging application. Third-party open-source
 packages retain their own licenses (see each `package.json`).
+
+## Contributor
+
+- [MinakshiShirtode](https://github.com/MinakshiShirtode)
